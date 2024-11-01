@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.gadini.checkpoint3.dtos.ContatosRequestCreateDto;
 import com.github.gadini.checkpoint3.dtos.ContatosRequestUpdateDto;
 import com.github.gadini.checkpoint3.dtos.ContatosResponseDto;
 import com.github.gadini.checkpoint3.mapper.ContatosMapper;
+import com.github.gadini.checkpoint3.repository.ContatosRepository;
 import com.github.gadini.checkpoint3.service.ContatosService;
 
 import lombok.RequiredArgsConstructor;
@@ -28,7 +30,7 @@ public class ContatosController {
 
     private final ContatosService contatosService;
     private final ContatosMapper contatosMapper;
-    // private final ContatosRepository contatosRepository;
+    private final ContatosRepository contatosRepository;
 
     @GetMapping
     public ResponseEntity<List<ContatosResponseDto>> list() {
@@ -85,18 +87,11 @@ public class ContatosController {
     			);    	  		     
     }
     
-    // @GetMapping("/find")
-    // public  ResponseEntity<?> findByNome(
-    //             @RequestParam String nome, 
-    //             ProdutoViewType type) { 
+    @GetMapping("/find")
+    public  ResponseEntity<?> findByNome(
+                @RequestParam String nome) { 
 
-    //     switch (type) {
-    //         case FULL:
-    //             return ResponseEntity.ok().body(produtoRepository.findAllByNomeContains(nome, ProdutoFullView.class));                
-    //         case SIMPLE:
-    //             return ResponseEntity.ok().body(produtoRepository.findAllByNomeContains(nome, ProdutoSimpleView.class));            
-    //     }
-    //     return ResponseEntity.noContent().build();
-    // }
+                    return ResponseEntity.ok().body(contatosRepository.findByNome(nome));
+    }
 
 }

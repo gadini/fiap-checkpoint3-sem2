@@ -7,5 +7,5 @@ import com.github.gadini.checkpoint3.model.Contatos;
 
 @Repository
 public interface ContatosRepository extends JpaRepository<Contatos, Long>{
-
+    <T> T findByNome(String nome);
 }
